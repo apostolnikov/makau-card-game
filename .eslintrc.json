@@ -1,0 +1,26 @@
+{
+    "extends": "airbnb",
+    "rules": {
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "no-use-before-define": ["error", { "variables": false }],
+        "react/destructuring-assignment": false,
+        "react/prop-types": false,
+        "global-require": 0,
+        "react/jsx-wrap-multilines": false,
+        "object-curly-newline": 0,
+        "import/prefer-default-export": false,
+        "prefer-destructuring": 0,
+        "eol-last": 0,
+        "react/jsx-boolean-value": false,
+        "comma-dangle": 0,
+        "operator-linebreak": 0,
+        "import/no-dynamic-require": 0,
+        "react/prefer-stateless-function": 0,
+        "implicit-arrow-linebreak": 0,
+        "arrow-parens": 0,
+        "no-unused-expressions": 0,
+        "no-unescaped-entities": false,
+        "react/no-access-state-in-setstate": false,
+        "max-len": 0
+        }
+}
