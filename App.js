@@ -1,10 +1,8 @@
 import React from 'react';
-import { Text } from 'react-native';
 import { Provider } from 'react-redux';
 import Game from './src/Game';
 import store from './src/store/store';
-import * as firebase from 'firebase';
-import styled from 'styled-components';
+// import * as firebase from 'firebase';
 
 // import { firebaseConfig } from './src/config/firebaseConfig';
 
@@ -24,10 +22,3 @@ export default class App extends React.Component {
     );
   }
 }
-
-const Main = styled.View`
-  flex: 1;
-  background-color: #fff;
-  align-items: center;
-  justify-content: center;
-`;
