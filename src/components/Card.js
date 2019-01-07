@@ -1,18 +1,20 @@
 import React from 'react';
-import { TouchableOpacity, Image } from 'react-native';
-import commonStyle from './styles';
+import { TouchableOpacity } from 'react-native';
+import styled from 'styled-components';
 export default class Card extends React.Component {
   render() {
     return (
       <TouchableOpacity>
-        <Image
+        <CardImage
           resize="stretch"
           source={this.props.card.image}
-          style={[
-            commonStyle.card
-          ]}
         />
       </TouchableOpacity>
     );
   }
 }
+
+const CardImage = styled.Image`
+  width: 100;
+  height: 175;
+`;
