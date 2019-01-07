@@ -13,12 +13,9 @@ import store from './src/store/store';
 //   console.log(snapshot.val());
 // });
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <Game />
-      </Provider>
-    );
-  }
-}
+const App = () =>
+  <Provider store={store}>
+    <Game />
+  </Provider>;
+
+export default App;

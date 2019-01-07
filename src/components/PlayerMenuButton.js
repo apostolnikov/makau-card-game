@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Text } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { Ionicons } from '@expo/vector-icons';
 
 export default class PlayerMenu extends React.Component {
   render() {
@@ -15,7 +15,7 @@ export default class PlayerMenu extends React.Component {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <Icon color={'white'} name={this.props.icon} size={30} />
+        <Ionicons name="md-checkmark-circle" size={32} color="green" />
         <Text style={{ color: '#fff' }}>{this.props.text}</Text>
       </TouchableOpacity>
     );

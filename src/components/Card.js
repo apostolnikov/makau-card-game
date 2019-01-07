@@ -7,11 +7,9 @@ export default class Card extends React.Component {
       <TouchableOpacity>
         <Image
           resize="stretch"
-          source={require('../assets/card/2_of_clubs.png')}
+          source={this.props.card.image}
           style={[
-            commonStyle.card,
-            this.props.style,
-            { transform: [{ rotate: this.props.rotation + 'deg' }] },
+            commonStyle.card
           ]}
         />
       </TouchableOpacity>
