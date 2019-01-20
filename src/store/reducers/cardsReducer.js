@@ -2,6 +2,7 @@ import { shuffleCards, createCards } from '../../shared/heplers';
 
 const START_GAME = 'cards/START_GAME';
 const DEAL_CARDS = 'cards/DEAL_CARDS';
+const ADD_CARD_TO_DECK = 'cards/ADD_CARD_TO_DECK';
 
 const initialState = {
   isGameStarted: false,
@@ -28,6 +29,12 @@ export default function reducer(state = initialState, action) {
       deck: state.deck.slice(6, state.deck.length)
     };
 
+  case ADD_CARD_TO_DECK:
+    return {
+      ...state,
+      deck: [...state.deck, payload]
+    };
+
   default:
     return state;
   }
@@ -44,4 +51,9 @@ export const startGame = () => ({
 
 export const dealCards = () => ({
   type: DEAL_CARDS
+});
+
+export const addCardToDeck = (card) => ({
+  type: ADD_CARD_TO_DECK,
+  payload: card
 });

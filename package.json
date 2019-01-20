@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "expo start",
-    "dstart": "rndebugger-open --expo",
+    "debugger-start": "rndebugger-open --expo",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "eject": "expo eject"

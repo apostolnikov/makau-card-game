@@ -1,20 +1,20 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
-export default class Card extends React.Component {
-  render() {
-    return (
-      <TouchableOpacity>
-        <CardImage
-          resize="stretch"
-          source={this.props.card.image}
-        />
-      </TouchableOpacity>
-    );
-  }
-}
+
+const Card = ({ card, onCardPress }) =>
+  <TouchableOpacity onPress={() => onCardPress(card)}>
+    <CardImage
+      resize="stretch"
+      source={card.image}
+    />
+  </TouchableOpacity>;
+
+export default Card;
 
 const CardImage = styled.Image`
-  width: 100;
-  height: 175;
+  width: 100px;
+  height: 150px;
+  margin-left: 3px;
+  margin-right: 3px;
 `;
