@@ -14,6 +14,7 @@
     "firebase": "^5.7.2",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
+    "react-native-countdown-circle": "^3.0.0",
     "react-native-debugger-open": "^0.3.17",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",

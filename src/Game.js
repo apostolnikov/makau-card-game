@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import CountdownCircle from 'react-native-countdown-circle';
 import styled from 'styled-components';
 import PlayerHand from './components/PlayerHand';
 import { startGame, dealCards } from './store/reducers/cardsReducer';
@@ -22,8 +23,17 @@ class Game extends React.Component {
 
     return (
       <Main source={require('./assets/background.png')}>
+        <CountdownCircle
+          seconds={25}
+          radius={30}
+          borderWidth={8}
+          color="#ff003f"
+          bgColor="#fff"
+          textStyle={{ fontSize: 20 }}
+          onTimeElapsed={() => console.log('Elapsed!')}
+        />
         <Deck card={topDeckCard} isFromDeck/>
-        <PlayerHand />
+        <Hand />
       </Main>
     );
   }
@@ -37,10 +47,17 @@ const Main = styled.ImageBackground`
   height: 100%;
   flex-direction: column;
   padding: 10px;
-  align-content: space-between;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Deck = styled(Card)`
   width: 100%;
-  margin: auto;
+  height: auto;
+  margin-top: 200px;
+`;
+
+const Hand = styled(PlayerHand)`
+  margin-top: 500px;
+  height: auto;
 `;
