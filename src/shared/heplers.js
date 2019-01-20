@@ -1,4 +1,6 @@
+import { Alert, Platform, ToastAndroid } from 'react-native';
 import cards from '../assets/cards';
+
 const card_type = ['clubs', 'diamonds', 'spades', 'hearths'];
 const card_numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13'];
 
@@ -26,3 +28,14 @@ const getCard = (typeIndex, cardIndex) => ({
   number: card_numbers[cardIndex],
   image: cards[card_type[typeIndex]][`_${card_numbers[cardIndex]}`],
 });
+
+
+export const cannotPlayCardWarning = () => {
+  Platform.OS === 'android'
+    ? ToastAndroid.show('You cannot play that card!', ToastAndroid.SHORT)
+    : Alert.alert(
+      'You cannot play that card!',
+      '',
+      [{text: 'OK', onPress: () => console.log('OK Pressed')}]
+    );
+};

@@ -3,17 +3,27 @@ import { connect } from 'react-redux';
 import Card from './Card';
 import styled from 'styled-components';
 import { addCardToDeck } from '../store/reducers/cardsReducer';
+import { getTopLevelCard } from '../shared/selectors';
 
 const mapStateToProps = ({ cards }) => ({
-  playerHand: cards.playerHand
+  playerHand: cards.playerHand,
+  topDeckCard: getTopLevelCard(cards.deck)
 });
 class PlayerHand extends React.Component {
 
+  getItemKey = (item) => this.props.playerHand.indexOf(item).toString();
+
   onCardPress = (card) => this.props.dispatch(addCardToDeck(card));
 
-  renderCard = ({ item }) => <Card card={item} onCardPress={this.onCardPress}/>;
+  checkIfCardIsPlayable = (topDeckCard, currectCard) =>
+    topDeckCard.type === currectCard.type || topDeckCard.number === currectCard.number;
 
-  getItemKey = (item) => this.props.playerHand.indexOf(item).toString();
+  renderCard = ({ item }) =>
+    <Card
+      card={item}
+      onCardPress={this.onCardPress}
+      isPlayable={this.checkIfCardIsPlayable(this.props.topDeckCard, item)}
+    />;
 
   render() {
     return (

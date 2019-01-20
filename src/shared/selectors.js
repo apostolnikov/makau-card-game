@@ -1,0 +1,1 @@
+export const getTopLevelCard = deck => deck.length && deck[deck.length - 1];

@@ -4,11 +4,12 @@ import styled from 'styled-components';
 import PlayerHand from './components/PlayerHand';
 import { startGame, dealCards } from './store/reducers/cardsReducer';
 import Card from './components/Card';
+import { getTopLevelCard } from './shared/selectors';
 
 const mapStateToProps = ({ cards }) => ({
   gameStart: cards.gameStart,
   isMyTurn: cards.isMyTurn,
-  deck: cards.deck
+  topDeckCard: getTopLevelCard(cards.deck)
 });
 class Game extends React.Component {
   componentDidMount() {
@@ -17,12 +18,11 @@ class Game extends React.Component {
   }
 
   render() {
-    const { deck } = this.props;
-    const topDeckCard = deck.length && deck[deck.length - 1];
+    const { topDeckCard } = this.props;
 
     return (
       <Main source={require('./assets/background.png')}>
-        <Deck card={topDeckCard}/>
+        <Deck card={topDeckCard} isFromDeck/>
         <PlayerHand />
       </Main>
     );
@@ -41,6 +41,6 @@ const Main = styled.ImageBackground`
 `;
 
 const Deck = styled(Card)`
-  width: 150px;
-  height: 225px;
+  width: 100%;
+  margin: auto;
 `;
