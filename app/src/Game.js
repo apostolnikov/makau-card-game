@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import SocketIOClient from 'socket.io-client';
 import CountdownCircle from 'react-native-countdown-circle';
 import styled from 'styled-components';
 import PlayerHand from './components/PlayerHand';
@@ -14,6 +15,8 @@ const mapStateToProps = ({ cards }) => ({
 });
 class Game extends React.Component {
   componentDidMount() {
+    this.socket = SocketIOClient('http://localhost:3000');
+
     this.props.dispatch(startGame());
     this.props.dispatch(dealCards());
   }
