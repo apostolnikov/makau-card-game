@@ -32,7 +32,8 @@ export default function reducer(state = initialState, action) {
   case ADD_CARD_TO_DECK:
     return {
       ...state,
-      deck: [...state.deck, payload]
+      deck: [...state.deck, payload],
+      playerHand: state.playerHand.filter(h => !(h.type === payload.type && h.number === payload.number))
     };
 
   default:

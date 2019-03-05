@@ -11,9 +11,9 @@ const mapStateToProps = ({ cards }) => ({
 });
 class PlayerHand extends React.Component {
 
-  getItemKey = (item) => this.props.playerHand.indexOf(item).toString();
+  getItemKey = item => this.props.playerHand.indexOf(item).toString();
 
-  onCardPress = (card) => this.props.dispatch(addCardToDeck(card));
+  onCardPress = card => this.props.dispatch(addCardToDeck(card));
 
   checkIfCardIsPlayable = (topDeckCard, currectCard) =>
     topDeckCard.type === currectCard.type || topDeckCard.number === currectCard.number;
