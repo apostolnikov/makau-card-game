@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import SocketIOClient from 'socket.io-client';
+import SocketIOClient from 'socket.io-client/dist/socket.io';
 import CountdownCircle from 'react-native-countdown-circle';
 import styled from 'styled-components';
 import PlayerHand from './components/PlayerHand';
@@ -14,9 +14,14 @@ const mapStateToProps = ({ cards }) => ({
   topDeckCard: getTopLevelCard(cards.deck)
 });
 class Game extends React.Component {
-  componentDidMount() {
-    this.socket = SocketIOClient('http://localhost:3000');
+  constructor(props) {
+    super(props);
 
+    this.socket = SocketIOClient('http://127.0.0.1:3000');
+    this.socket.on('connect', () => console.log('connected to server'));
+  }
+
+  componentDidMount() {
     this.props.dispatch(startGame());
     this.props.dispatch(dealCards());
   }

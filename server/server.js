@@ -1,13 +1,18 @@
 const express = require('express');
-const http = require('http')
-const socketio = require('socket.io');
+const http = require('http');
+const socketIO = require('socket.io');
 
+const port = 3000;
 const app = express();
-const server = http.Server(app);
-const io = socketio(server);
-server.listen(3000, () => console.log('listening on *:3000'));
+const server = http.createServer(app);
+const io = socketIO(server);
 
-// The event will be called when a client is connected.
-io.on('connection', (socket) => {
-  console.log('A client just joined on', socket.id);
+server.listen(port, () => console.log(`listening on port: ${port}`));
+
+io.on('connection', socket => {
+  console.log('new user connected');
+
+  socket.on('disconnect', () => {
+      console.log('User was disconnected');
+  });
 });
