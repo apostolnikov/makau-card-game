@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import SocketIOClient from 'socket.io-client/dist/socket.io';
+import SocketIO from 'socket.io-client';
 import CountdownCircle from 'react-native-countdown-circle';
 import styled from 'styled-components';
 import PlayerHand from './components/PlayerHand';
@@ -17,11 +17,12 @@ class Game extends React.Component {
   constructor(props) {
     super(props);
 
-    this.socket = SocketIOClient('http://127.0.0.1:3000');
+    this.socket = SocketIO('http://192.168.1.4:3000');
     this.socket.on('connect', () => console.log('connected to server'));
   }
 
   componentDidMount() {
+    this.socket.emit('message-channel', 'Hey socket');
     this.props.dispatch(startGame());
     this.props.dispatch(dealCards());
   }

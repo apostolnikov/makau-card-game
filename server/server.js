@@ -7,11 +7,12 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
 
-server.listen(port, () => console.log(`listening on port: ${port}`));
+server.listen(port, () => console.log(port, 'is up'));
 
 io.on('connection', socket => {
   console.log('new user connected');
 
+  socket.on('message-channel', message => console.log(message));
   socket.on('disconnect', () => {
       console.log('User was disconnected');
   });
