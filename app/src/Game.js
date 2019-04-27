@@ -1,12 +1,14 @@
 import React from 'react';
+import { AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import SocketIO from 'socket.io-client';
-import CountdownCircle from 'react-native-countdown-circle';
+import CountdownTimer from './components/CountdownTimer';
 import styled from 'styled-components';
 import PlayerHand from './components/PlayerHand';
 import { startGame, dealCards } from './store/reducers/cardsReducer';
 import Card from './components/Card';
 import { getTopLevelCard } from './shared/selectors';
+import UserNameModal from './components/UserNameModal';
 
 const mapStateToProps = ({ cards }) => ({
   gameStart: cards.gameStart,
@@ -17,30 +19,45 @@ class Game extends React.Component {
   constructor(props) {
     super(props);
 
-    this.socket = SocketIO('http://192.168.1.4:3000');
+    this.state = {
+      userID: null,
+      showUserModal: false
+    };
+
+    this.socket = SocketIO('http://192.168.1.12:3000');
     this.socket.on('connect', () => console.log('connected to server'));
+    this.checkUserID();
   }
 
   componentDidMount() {
-    this.socket.emit('message-channel', 'Hey socket');
     this.props.dispatch(startGame());
     this.props.dispatch(dealCards());
   }
 
+  checkUserID() {
+    AsyncStorage.getItem('userID')
+      .then((userID) => {
+        if (!userID) {
+          this.setState({ showUserModal: true });
+        } else {
+          this.socket.emit('userJoined', userID);
+          this.setState({ userID });
+        }
+      });
+  }
+
+  // createNewUser() {
+
+  // }
+
   render() {
     const { topDeckCard } = this.props;
+    const { userID, showUserModal } = this.state;
 
     return (
       <Main source={require('./assets/background.png')}>
-        <CountdownCircle
-          seconds={25}
-          radius={30}
-          borderWidth={8}
-          color="#ff003f"
-          bgColor="#fff"
-          textStyle={{ fontSize: 20 }}
-          onTimeElapsed={() => console.log('Elapsed!')}
-        />
+        <UserNameModal isVisible={showUserModal}/>
+        <CountdownTimer onTimePassed={() => console.log('time passed!!!')}/>
         <Deck card={topDeckCard} isFromDeck/>
         <Hand />
       </Main>
